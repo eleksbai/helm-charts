@@ -1,0 +1,68 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: seafile
+  labels:
+    app: seafile
+spec:
+  selector:
+    matchLabels:
+      app: seafile
+      tier: frontend
+  strategy:
+    type: Recreate
+  template:
+    metadata:
+      labels:
+        app: seafile
+        tier: frontend
+    spec:
+      containers:
+      - image: seafileltd/seafile-mc:9.0.10
+        name: seafile
+        env:
+        - name: DB_HOST
+          value: seafile-mysql
+        - name: DB_ROOT_PASSWD
+          valueFrom:
+            secretKeyRef:
+              name: seafile-pass
+              key: dbRootPassword
+        - name: TIME_ZONE
+          value: {{ .Values.timezone }}
+        - name: SEAFILE_ADMIN_EMAIL
+          value: {{ .Values.adminEmail }}
+        - name: SEAFILE_ADMIN_PASSWORD
+          valueFrom:
+            secretKeyRef:
+              name: seafile-pass
+              key: adminPassword
+        - name: SEAFILE_SERVER_LETSENCRYPT
+          value: {{ .Values.serverLetsencrypt | quote}}
+        - name: SEAFILE_SERVER_HOSTNAME
+          value: {{ .Values.serverHostname }}
+        ports:
+        - containerPort: 80
+          name: http
+{{/*        # This is not working*/}}
+{{/*        livenessProbe:*/}}
+{{/*          httpGet:*/}}
+{{/*            path: /*/}}
+{{/*            port: http*/}}
+{{/*            httpHeaders:*/}}
+{{/*              - name: Custom-Header*/}}
+{{/*                value: Awesome*/}}
+{{/*          initialDelaySeconds: 15*/}}
+{{/*          periodSeconds: 15*/}}
+{{/*        readinessProbe:*/}}
+{{/*          httpGet:*/}}
+{{/*            path: /*/}}
+{{/*            port: http*/}}
+{{/*        resources: {}*/}}
+        volumeMounts:
+        - name: seafile-persistent-storage
+          mountPath: /shared
+      volumes:
+      - name: seafile-persistent-storage
+        persistentVolumeClaim:
+          claimName: seafile-pv-claim

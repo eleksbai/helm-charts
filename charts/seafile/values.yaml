@@ -1,0 +1,24 @@
+# Default values for seafile.
+# This is a YAML-formatted file.
+# Declare variables to be passed into your templates.
+
+# dbRootPassword is mysql db password
+dbRootPassword: "YOU_PASSWORD"
+# port is seafile port
+port: 8090
+# adminEmail
+adminEmail: "admin@example.com"
+# adminPassword
+adminPassword: "YOU_PASSWORD"
+# serverLetsencrypt is  SEAFILE_SERVER_LETSENCRYPT, set ( "false" | "true" )
+serverLetsencrypt: "false"
+# serverHostname is SEAFILE_SERVER_HOSTNAME
+serverHostname: "seafile.example.com"
+# timezone
+timezone: Asia/Shanghai
+
+# STORAGE CLASS use  local-path, not support limit
+# storageDb is mysql storage size
+storageDb: 10G
+# storageSeafile size
+storageSeafile: 500Gi

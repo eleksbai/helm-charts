@@ -1,0 +1,24 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: memcached
+  labels:
+    app: seafile
+spec:
+  selector:
+    matchLabels:
+      app: seafile
+      tier: memcached
+  strategy:
+    type: Recreate
+  template:
+    metadata:
+      labels:
+        app: seafile
+        tier: memcached
+    spec:
+      containers:
+      - image: memcached:1.6
+        name: seafile-memcached
+{{/*        command: ["memcached", "-m","256"]*/}}
+

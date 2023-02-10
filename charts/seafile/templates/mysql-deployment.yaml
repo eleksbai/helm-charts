@@ -1,0 +1,40 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: seafile-mysql
+  labels:
+    app: seafile
+spec:
+  selector:
+    matchLabels:
+      app: seafile
+      tier: mysql
+  strategy:
+    type: Recreate
+  template:
+    metadata:
+      labels:
+        app: seafile
+        tier: mysql
+    spec:
+      containers:
+      - image: mariadb:10.5
+        name: seafile-mysql
+        env:
+        - name: MYSQL_ROOT_PASSWORD
+          valueFrom:
+            secretKeyRef:
+              name: seafile-pass
+              key: dbRootPassword
+        - name: MYSQL_LOG_CONSOLE
+          value: "true"
+        ports:
+        - containerPort: 3306
+          name: mysql
+        volumeMounts:
+        - name: mysql-persistent-storage
+          mountPath: /var/lib/mysql
+      volumes:
+      - name: mysql-persistent-storage
+        persistentVolumeClaim:
+          claimName: seafile-mysql-pv-claim
