@@ -14,6 +14,16 @@ entries:
   seafile:
   - apiVersion: v2
     appVersion: 9.0.10
+    created: "2023-02-11T04:29:55.00466955Z"
+    description: A Helm chart for Kubernetes
+    digest: 7912b19ba201a41c1091bc9b5f0db0375c64864063455719cf6cf3fd9f1a0dac
+    name: seafile
+    type: application
+    urls:
+    - https://github.com/eleksbai/helm-charts/releases/download/seafile-0.1.1/seafile-0.1.1.tgz
+    version: 0.1.1
+  - apiVersion: v2
+    appVersion: 9.0.10
     created: "2023-02-10T15:31:56.074971018Z"
     description: A Helm chart for Kubernetes
     digest: 76131648635f86b43c09dde6e4e925e50c3d20c058e53010acc5226f6c5910f0
@@ -22,4 +32,4 @@ entries:
     urls:
     - https://github.com/eleksbai/helm-charts/releases/download/seafile-0.1.0/seafile-0.1.0.tgz
     version: 0.1.0
-generated: "2023-02-10T15:31:56.074975818Z"
+generated: "2023-02-11T04:29:55.00467645Z"
