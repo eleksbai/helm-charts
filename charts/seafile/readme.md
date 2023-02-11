@@ -1,5 +1,7 @@
 # seafile
-![Version: 0.1.1](https://img.shields.io/badge/Version-3.1.2-informational?style=flat-square) ![AppVersion: 9.0.10](https://img.shields.io/badge/AppVersion-8.0.7-informational?style=flat-square)
+![Version](https://img.shields.io/badge/Version-0.1.1-informational?style=flat-square)
+![AppVersion](https://img.shields.io/badge/AppVersion-9.0.10-informational?style=flat-square)
+
 see [seafile deploy](https://manual.seafile.com/docker/deploy_seafile_with_docker/)
 
 # usage
@@ -11,7 +13,6 @@ vim my-seafile-value.yaml
 helm install -f my-seafile-value.yaml my-seafile  eleksbai/seafile
 
 ```
-
 # images
 | image                           | tag    |
 |---------------------------------|--------|
@@ -19,6 +20,29 @@ helm install -f my-seafile-value.yaml my-seafile  eleksbai/seafile
 | docker.io/library/mariadb       | 10.6   |
 | docker.io/seafileltd/seafile-mc | 9.0.10 |
 
+# values
+```yaml
+# dbRootPassword is mysql db password
+dbRootPassword: "YOU_PASSWORD"
+# port is seafile port
+port: 8090
+# adminEmail
+adminEmail: "admin@example.com"
+# adminPassword
+adminPassword: "YOU_PASSWORD"
+# serverLetsencrypt is  SEAFILE_SERVER_LETSENCRYPT, set ( "false" | "true" )
+serverLetsencrypt: "false"
+# serverHostname is SEAFILE_SERVER_HOSTNAME
+serverHostname: "seafile.example.com"
+# timezone
+timezone: Asia/Shanghai
+
+# not support limit if STORAGE CLASS use  local-path
+# storageDb is mysql storage size
+storageDb: 10G
+# storageSeafile size
+storageSeafile: 500Gi
+```
 
 # change-pv-reclaim-policy
 https://kubernetes.io/docs/tasks/administer-cluster/change-pv-reclaim-policy/
