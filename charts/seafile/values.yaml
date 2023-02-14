@@ -23,8 +23,10 @@ storageDb: 10
 # storageSeafile size  (G)
 storageSeafile: 500
 
-# ssl
-ssl:
-  enabled: true
-  nginxCrt: "cccccccccccccccc"
-  nginxKey: "kkkkkkkkkkkkk"
+# export internal seafile port, for use host nginx
+exportInternalPort:
+  enabled: false
+  seafileMain: 8000
+  seafileSeafdav: 8080
+  seafileSeafhttp:  8082
+

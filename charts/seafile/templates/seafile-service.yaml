@@ -6,13 +6,19 @@ metadata:
     app: seafile
 spec:
   ports:
-{{/*    - port: 30088*/}}
-{{/*      targetPort: 80*/}}
     - port: {{ int .Values.port}}
-    {{- if .Values.ssl.enabled }}
-      targetPort: 443
-    {{- else }}
       targetPort: 80
+      name: http
+    {{- if .Values.exportInternalPort.enabled}}
+    - port: {{.Values.exportInternalPort.seafileMain}}
+      targetPort: 8000
+      name: seafile
+    - port: {{.Values.exportInternalPort.seafileSeafdav}}
+      targetPort: 8080
+      name: seafdav
+    - port: {{.Values.exportInternalPort.seafileSeafhttp}}
+      targetPort: 8082
+      name: seafhttp
     {{- end }}
   selector:
     app: seafile

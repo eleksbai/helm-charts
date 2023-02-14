@@ -44,47 +44,19 @@ spec:
         ports:
         - containerPort: 80
           name: http
+        {{- if .Values.exportInternalPort.enabled}}
         - containerPort: 8000
-          name: seafile-main
+          name: seafile
         - containerPort: 8080
-          name: seafile-seafdav
+          name: seafdav
         - containerPort: 8082
-          name: seafile-seafhttp
-{{/*        # This is not working*/}}
-{{/*        livenessProbe:*/}}
-{{/*          httpGet:*/}}
-{{/*            path: /*/}}
-{{/*            port: http*/}}
-{{/*            httpHeaders:*/}}
-{{/*              - name: Custom-Header*/}}
-{{/*                value: Awesome*/}}
-{{/*          initialDelaySeconds: 15*/}}
-{{/*          periodSeconds: 15*/}}
-{{/*        readinessProbe:*/}}
-{{/*          httpGet:*/}}
-{{/*            path: /*/}}
-{{/*            port: http*/}}
-{{/*        resources: {}*/}}
+          name: seafhttp
+        {{- end }}
         volumeMounts:
         - name: seafile-persistent-storage
           mountPath: /shared
-        {{- if .Values.ssl.enabled }}
-        - name: nginx-ssl
-          mountPath: /shared/ssl
-{{/*          readOnly: true*/}}
-        {{- end }}
       volumes:
       - name: seafile-persistent-storage
         persistentVolumeClaim:
           claimName: seafile-pv-claim
-
-      {{- if .Values.ssl.enabled }}
-      - name: nginx-ssl
-{{/*        configMap:*/}}
-{{/*          name: seafile-ssl-configmap*/}}
-        hostPath:
-          path: /opt/seafile/ssl
-          type: Directory
-      {{- end }}
-
 
