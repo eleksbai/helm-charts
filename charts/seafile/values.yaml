@@ -18,7 +18,13 @@ serverHostname: "seafile.example.com"
 timezone: Asia/Shanghai
 
 # STORAGE CLASS use  local-path, not support limit
-# storageDb is mysql storage size
-storageDb: 10G
-# storageSeafile size
-storageSeafile: 500Gi
+# storageDb is mysql storage size  (G)
+storageDb: 10
+# storageSeafile size  (G)
+storageSeafile: 500
+
+# ssl
+ssl:
+  enabled: true
+  nginxCrt: "cccccccccccccccc"
+  nginxKey: "kkkkkkkkkkkkk"

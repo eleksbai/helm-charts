@@ -9,4 +9,4 @@ spec:
     - ReadWriteOnce
   resources:
     requests:
-      storage: {{.Values.storageDb}}
+      storage: {{.Values.storageDb}}G

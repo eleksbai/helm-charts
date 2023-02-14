@@ -1,3 +1,4 @@
 .idea
 charts/*/charts/*
 venv
+my-values.yaml
